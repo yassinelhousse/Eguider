@@ -19,10 +19,15 @@ export default function Landing() {
       resizeMode="cover"
     >
       <View style={styles.overlay}>
-        <View style={styles.top}>
-          <Text style={styles.logo}>Eguider</Text>
+        <View>
+          <Pressable
+            style={styles.btnlogin}
+            onPress={() => router.push("/auth/login")}
+          >
+            <Text style={styles.btnloginText}>Login</Text>
+          </Pressable>
         </View>
-
+       
         <View style={styles.bottom}>
           <Text style={styles.small}>Plan your</Text>
           <Text style={styles.big}>Luxurious</Text>
@@ -78,4 +83,16 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     fontSize: 16,
   },
+  btnlogin: {
+    alignSelf: "flex-end",
+    backgroundColor: "rgba(255,255,255,0.75)",
+    padding: 10,
+    borderRadius: 14,
+    marginTop: 15,
+  },
+  btnloginText: {
+    fontWeight: "800",
+    fontSize: 14,
+  },
+
 });

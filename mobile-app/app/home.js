@@ -50,7 +50,7 @@ export default function HomeScreen() {
       <Text style={styles.heading}>GUIDED TOUR</Text>
 
       {/* Search */}
-      <SearchBar value={search} onChange={setSearch} onFilterPress={() => {}} />
+      <SearchBar value={search} onChange={setSearch} onFilterPress={() => router.push("/search")} />
 
       {/* Content */}
       {loading ? (
