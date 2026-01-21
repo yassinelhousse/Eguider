@@ -16,9 +16,10 @@ app.use(express.json());
 app.use("/api", apiRoutes);
 
 // Test route
-app.get("/", (req, res) => {
-  res.json({ message: "API is running ✅" });
+app.get("/health", (req, res) => {
+  res.json({ status: "OK", message: "Backend running ✅" });
 });
+
 
 const PORT = process.env.PORT || 5000;
 
