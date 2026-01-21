@@ -35,7 +35,7 @@ export default function HomeScreen() {
     <View style={styles.container}>
       {/* Top Bar */}
       <View style={styles.topBar}>
-        <Pressable>
+        <Pressable onPress={()=> router.push("/bookings")}>
           <Text style={styles.icon}>☰</Text>
         </Pressable>
 
