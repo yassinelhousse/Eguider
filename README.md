@@ -12,8 +12,6 @@ Eguider est une application mobile innovante qui met en relation des touristes a
 
 - 🔍 Recherche avancée de guides (lieu, langue, spécialité)
 - 📅 Système de réservation intuitif
-- 💳 Paiement en ligne sécurisé
-- 💬 Messagerie directe entre touristes et guides
 - ⭐ système d'évaluation et de commentaires
 - 🔐 Authentification sécurisée
 
