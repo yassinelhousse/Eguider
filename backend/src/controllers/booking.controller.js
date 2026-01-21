@@ -48,7 +48,7 @@ export const getAllBookings = async (req, res) => {
         },
         {
           model: Tour,
-          attributes: ["id", "title", "city", "price"],
+          attributes: ["id", "title", "city", "price", "images"],
         },
       ],
       order: [["createdAt", "DESC"]],

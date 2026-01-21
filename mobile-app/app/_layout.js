@@ -7,6 +7,7 @@ export default function Layout() {
       <Stack.Screen name="home" />
       <Stack.Screen name="tour/[id]" />
       <Stack.Screen name="booking/[id]" />
+      <Stack.Screen name="bookings" />
     </Stack>
   );
 }

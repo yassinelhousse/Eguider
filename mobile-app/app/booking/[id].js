@@ -90,10 +90,16 @@ export default function BookingFormScreen() {
 
       const res = await api.post("/bookings", payload);
 
-      Alert.alert("✅ Success", "Booking created successfully!");
+      Alert.alert(
+        "✅ Booking Created",
+        "Your booking has been created successfully!",
+        [
+          { text: "View Tours", onPress: () => router.push("/home") },
+          { text: "Stay Here", style: "cancel" },
+        ],
+      );
 
-      // Go back to home (or details)
-      router.push("/home");
+
     } catch (err) {
       console.log("❌ booking submit error:", err?.message);
       Alert.alert("❌ Error", "Booking failed. Try again.");
