@@ -39,6 +39,29 @@ export const createBooking = async (req, res) => {
   }
 };
 
+
+
+export const getMyBookings = async (req, res) => {
+  try {
+    const bookings = await Booking.findAll({
+      where: { userId: req.user.id },
+      include: [
+        {
+          model: Tour,
+          attributes: ["id", "title", "city", "price", "images"],
+        },
+      ],
+      order: [["createdAt", "DESC"]],
+    });
+
+    res.json(bookings);
+  } catch (error) {
+    console.log("❌ getMyBookings error:", error);
+    res.status(500).json({ message: "Failed to fetch bookings" });
+  }
+};
+
+
 export const getAllBookings = async (req, res) => {
   try {
     const bookings = await Booking.findAll({
@@ -54,6 +77,10 @@ export const getAllBookings = async (req, res) => {
       ],
       order: [["createdAt", "DESC"]],
     });
+
+
+
+
 
     res.json(bookings);
   } catch (error) {

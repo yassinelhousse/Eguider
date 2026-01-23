@@ -1,14 +1,18 @@
-import { View, Text, TextInput, Pressable, StyleSheet } from "react-native";
+import { View, Text, TextInput, Pressable, StyleSheet,Alert } from "react-native";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { colors } from "../../src/theme/colors";
+import { useAuthStore } from "../../src/store/auth.store";
+
 
 export default function SignupScreen() {
   const router = useRouter();
+  
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { register, loading, error } = useAuthStore();
 
   return (
     <View style={styles.container}>
@@ -68,10 +72,28 @@ export default function SignupScreen() {
 
       {/* Signup Button */}
       <Pressable
-        style={styles.mainBtn}
-        onPress={() => router.push("/auth/login")}
+        style={[styles.mainBtn, loading && { opacity: 0.6 }]}
+        disabled={loading}
+        onPress={async () => {
+          if (!name.trim() || !email.trim() || !password.trim()) {
+            return Alert.alert("❌ Missing", "Fill all fields");
+          }
+
+          const ok = await register(name.trim(), email.trim(), password.trim());
+
+          if (ok) {
+            Alert.alert("✅ Success", "Account created!");
+            router.replace("/(tabs)/home");
+          } else {
+            const msg = useAuthStore.getState().error;
+            Alert.alert("❌ Error", msg || "Register failed");
+          }
+        }}
+
       >
-        <Text style={styles.mainBtnText}>Create Account</Text>
+        <Text style={styles.mainBtnText}>
+          {loading ? "Creating..." : "Create Account"}
+        </Text>
       </Pressable>
 
       {/* Login link */}
