@@ -5,6 +5,7 @@ import {
   Tour,
   Booking,
 } from "./models/index.js";
+import bcrypt from "bcryptjs";
 
 const seed = async () => {
   try {
@@ -58,6 +59,17 @@ const seed = async () => {
       userId: user.id,
       tourId: tour.id,
     });
+    const hashed = await bcrypt.hash("123456", 10);
+
+await User.bulkCreate([
+  {
+    name: "Guide Marrakech",
+    email: "guide1@gmail.com",
+    password: hashed,
+    role: "guide",
+  },
+]);
+
 
     console.log("✅ Seed completed successfully");
     process.exit();
