@@ -61,6 +61,38 @@ export const getMyBookings = async (req, res) => {
   }
 };
 
+export const cancelBooking = async (req, res) => {
+  try {
+    const bookingId = req.params.id;
+
+    // booking must belong to logged user
+    const booking = await Booking.findOne({
+      where: { id: bookingId, userId: req.user.id },
+    });
+
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found" });
+    }
+
+    // prevent cancel if already cancelled
+    if (booking.status === "cancelled") {
+      return res.status(400).json({ message: "Booking already cancelled" });
+    }
+
+    booking.status = "cancelled";
+    await booking.save();
+
+    return res.json({
+      message: "Booking cancelled successfully",
+      booking,
+    });
+  } catch (error) {
+    console.log("❌ cancel booking error:", error);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+
 
 export const getAllBookings = async (req, res) => {
   try {
@@ -77,6 +109,9 @@ export const getAllBookings = async (req, res) => {
       ],
       order: [["createdAt", "DESC"]],
     });
+
+
+    
 
 
 

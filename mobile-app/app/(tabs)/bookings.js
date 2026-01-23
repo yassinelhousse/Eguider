@@ -57,6 +57,7 @@ export default function BookingsScreen() {
   const renderItem = ({ item }) => {
     const tour = item.Tour;
     const img = getImage(tour);
+    const isCancelled = item.status?.toLowerCase() === "cancelled";
 
     return (
       <Pressable
@@ -82,9 +83,35 @@ export default function BookingsScreen() {
           </View>
 
           <View style={styles.statusRow}>
-            <View style={styles.badge}>
-              <Text style={styles.badgeText}>{item.status}</Text>
+            <View style={[styles.badge, isCancelled && styles.badgeCancelled]}>
+              <Text
+                style={[
+                  styles.badgeText,
+                  isCancelled && styles.badgeTextCancelled,
+                ]}
+              >
+                {item.status}
+              </Text>
             </View>
+
+            {!isCancelled && (
+              <Pressable
+                style={styles.cancelBtn}
+                onPress={async () => {
+                  try {
+                    await api.patch(`/bookings/${item.id}/cancel`);
+                    fetchBookings(); // refresh list
+                  } catch (err) {
+                    console.log(
+                      "❌ cancel booking error:",
+                      err?.response?.data || err.message,
+                    );
+                  }
+                }}
+              >
+                <Text style={styles.cancelText}>Cancel</Text>
+              </Pressable>
+            )}
           </View>
         </View>
       </Pressable>
@@ -200,6 +227,9 @@ const styles = StyleSheet.create({
 
   statusRow: {
     marginTop: 8,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 
   badge: {
@@ -210,11 +240,19 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
 
+  badgeCancelled: {
+    backgroundColor: "#ffebee",
+  },
+
   badgeText: {
     fontSize: 12,
     fontWeight: "900",
     color: colors.text,
     textTransform: "capitalize",
+  },
+
+  badgeTextCancelled: {
+    color: "#ff3b30",
   },
 
   center: {
@@ -259,5 +297,18 @@ const styles = StyleSheet.create({
   btnText: {
     color: "#fff",
     fontWeight: "900",
+  },
+
+  cancelBtn: {
+    backgroundColor: "#ff3b30",
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    borderRadius: 12,
+  },
+
+  cancelText: {
+    color: "white",
+    fontWeight: "900",
+    fontSize: 12,
   },
 });
