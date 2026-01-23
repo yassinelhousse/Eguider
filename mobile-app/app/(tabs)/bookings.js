@@ -10,8 +10,8 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 
-import { api } from "../src/api/client";
-import { colors } from "../src/theme/colors";
+import { api } from "../../src/api/client";
+import { colors } from "../../src/theme/colors";
 import { create } from "zustand";
 
 // ✅ simple zustand store inside this file (later we move it to src/store)

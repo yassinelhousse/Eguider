@@ -2,7 +2,8 @@ import { Booking, Tour, User } from "../models/index.js";
 
 export const createBooking = async (req, res) => {
   try {
-    const { userId, tourId, date } = req.body;
+    const { tourId, date } = req.body;
+    const userId = req.user.id; // from token
 
     // Validate required fields
     if (!userId || !tourId || !date) {

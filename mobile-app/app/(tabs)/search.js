@@ -9,9 +9,9 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 
-import { useTourStore } from "../src/store/tour.store";
-import { colors } from "../src/theme/colors";
-import TourCard from "../src/components/TourCard";
+import { useTourStore } from "../../src/store/tour.store";
+import { colors } from "../../src/theme/colors";
+import TourCard from "../../src/components/TourCard";
 
 export default function SearchScreen() {
   const router = useRouter();

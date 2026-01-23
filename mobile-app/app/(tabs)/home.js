@@ -9,10 +9,10 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 
-import SearchBar from "../src/components/SearchBar";
-import TourCard from "../src/components/TourCard";
-import { useTourStore } from "../src/store/tour.store";
-import { colors } from "../src/theme/colors";
+import SearchBar from "../../src/components/SearchBar";
+import TourCard from "../../src/components/TourCard";
+import { useTourStore } from "../../src/store/tour.store";
+import { colors } from "../../src/theme/colors";
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.bg,
     padding: 16,
+    paddingBottom: 100,
   },
   topBar: {
     flexDirection: "row",

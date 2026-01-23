@@ -2,9 +2,13 @@ import { View, Text, TextInput, Pressable, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { colors } from "../../src/theme/colors";
+import { useAuthStore } from "../../src/store/auth.store";
+import { Alert } from "react-native";
+
 
 export default function LoginScreen() {
   const router = useRouter();
+  const { login, loading } = useAuthStore();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -59,8 +63,23 @@ export default function LoginScreen() {
       </Pressable>
 
       {/* Login Button */}
-      <Pressable style={styles.mainBtn} onPress={() => router.push("/home")}>
-        <Text style={styles.mainBtnText}>Login</Text>
+      <Pressable
+        style={[styles.mainBtn, loading && { opacity: 0.6 }]}
+        disabled={loading}
+        onPress={async () => {
+          const ok = await login(email, password);
+
+          if (ok) {
+            Alert.alert("✅ Success", "Logged in successfully!");
+            router.replace("/(tabs)/home");
+          } else {
+            Alert.alert("❌ Error", "Invalid email or password");
+          }
+        }}
+      >
+        <Text style={styles.mainBtnText}>
+          {loading ? "Loading..." : "Login"}
+        </Text>
       </Pressable>
 
       {/* Signup link */}

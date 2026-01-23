@@ -83,18 +83,18 @@ export default function BookingFormScreen() {
 
       // MVP: hardcoded userId = 1
       const payload = {
-        userId: 1,
+        
         tourId: Number(id),
         date: formatDate(date),
       };
 
-      const res = await api.post("/bookings", payload);
+      await api.post("/bookings", payload);
 
       Alert.alert(
         "✅ Booking Created",
         "Your booking has been created successfully!",
         [
-          { text: "View Tours", onPress: () => router.push("/home") },
+          { text: "View Tours", onPress: () => router.push("/(tabs)/home") },
           { text: "Stay Here", style: "cancel" },
         ],
       );
