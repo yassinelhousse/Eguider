@@ -39,7 +39,7 @@ export default function HomeScreen() {
           <Text style={styles.icon}>☰</Text>
         </Pressable>
 
-        <Text style={styles.location}>📍 AGADIR</Text>
+        <Text style={styles.location}></Text>
 
         <Pressable>
           <Text style={styles.icon}>♡</Text>
@@ -47,10 +47,10 @@ export default function HomeScreen() {
       </View>
 
       {/* Title */}
-      <Text style={styles.heading}>GUIDED TOUR</Text>
+      <Text style={styles.heading}>TOP TOUR</Text>
 
       {/* Search */}
-      <SearchBar value={search} onChange={setSearch} onFilterPress={() => router.push("/search")} />
+      {/* <SearchBar value={search} onChange={setSearch} onFilterPress={() => router.push("/search")} /> */}
 
       {/* Content */}
       {loading ? (
