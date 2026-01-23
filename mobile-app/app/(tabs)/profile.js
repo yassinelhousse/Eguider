@@ -5,11 +5,12 @@ import { colors } from "../../src/theme/colors";
 
 export default function ProfileScreen() {
   const router = useRouter();
+
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
 
-  const handleLogout = async () => {
-    Alert.alert("Logout", "Are you sure?", [
+  const handleLogout = () => {
+    Alert.alert("Logout", "Do you want to logout?", [
       { text: "Cancel", style: "cancel" },
       {
         text: "Logout",
@@ -24,14 +25,17 @@ export default function ProfileScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Profile</Text>
+      <Text style={styles.header}>Profile</Text>
 
       <View style={styles.card}>
-        <Text style={styles.label}>Name</Text>
+        <Text style={styles.label}>Full Name</Text>
         <Text style={styles.value}>{user?.name || "Unknown"}</Text>
 
         <Text style={styles.label}>Email</Text>
         <Text style={styles.value}>{user?.email || "Unknown"}</Text>
+
+        <Text style={styles.label}>Role</Text>
+        <Text style={styles.value}>{user?.role || "user"}</Text>
       </View>
 
       <Pressable style={styles.logoutBtn} onPress={handleLogout}>
@@ -49,37 +53,43 @@ const styles = StyleSheet.create({
     paddingTop: 60,
     paddingBottom: 110,
   },
-  title: {
+
+  header: {
     fontSize: 28,
     fontWeight: "900",
     color: colors.text,
     marginBottom: 16,
   },
+
   card: {
     backgroundColor: colors.grayBtn,
-    borderRadius: 18,
+    borderRadius: 20,
     padding: 16,
   },
+
   label: {
-    marginTop: 10,
+    marginTop: 12,
     fontSize: 13,
     fontWeight: "800",
     color: colors.muted,
   },
+
   value: {
     marginTop: 4,
     fontSize: 16,
     fontWeight: "900",
     color: colors.text,
   },
+
   logoutBtn: {
-    marginTop: 20,
+    marginTop: 22,
     height: 52,
     borderRadius: 18,
     backgroundColor: "#ff3b30",
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
   },
+
   logoutText: {
     color: "white",
     fontSize: 15,
