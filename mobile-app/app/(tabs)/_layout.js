@@ -1,6 +1,8 @@
-import { Tabs } from "expo-router";
+import { Tabs, useRouter } from "expo-router";
+import { useEffect } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Platform, View, StyleSheet } from "react-native";
+import { useAuthStore } from "../../src/store/auth.store";
 
 function TabIcon({ name, focused }) {
   return (
@@ -11,12 +13,20 @@ function TabIcon({ name, focused }) {
 }
 
 export default function TabsLayout() {
+  const router = useRouter();
+  const token = useAuthStore((state) => state.token);
+
+  useEffect(() => {
+    if (!token) {
+      router.replace("/auth/login");
+    }
+  }, [token]);
+
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
-
         tabBarStyle: styles.tabBar,
         tabBarItemStyle: styles.tabItem,
       }}

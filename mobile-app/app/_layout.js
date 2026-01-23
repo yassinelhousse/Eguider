@@ -1,6 +1,13 @@
 import { Stack } from "expo-router";
+import React, { useEffect } from "react";
+import { useAuthStore } from "../src/store/auth.store";
 
 export default function Layout() {
+  const loadAuth = useAuthStore((state) => state.loadAuth);
+  useEffect(() => {
+    loadAuth(); 
+  }, []);
+  
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />
