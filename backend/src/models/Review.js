@@ -1,17 +1,30 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/database.js";
 import User from "./User.js";
-import Booking from "./Booking.js";
+import Tour from "./Tour.js";
 
 const Review = sequelize.define("Review", {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
+
   rating: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    validate: { min: 1, max: 5 },
   },
-  comment: DataTypes.TEXT,
+
+  comment: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 });
 
-Review.belongsTo(User, { foreignKey: "authorId" });
-Review.belongsTo(Booking, { foreignKey: "bookingId" });
+
+
+
+
 
 export default Review;
