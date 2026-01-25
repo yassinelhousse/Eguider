@@ -12,9 +12,7 @@ export default function Landing() {
 
   return (
     <ImageBackground
-      source={{
-        uri: "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
-      }}
+      source={require("../assets/images/Rectangle.png")}
       style={styles.bg}
       resizeMode="cover"
     >
@@ -27,11 +25,14 @@ export default function Landing() {
             <Text style={styles.btnloginText}>Login</Text>
           </Pressable>
         </View>
-       
+        
+
         <View style={styles.bottom}>
+        <View style={styles.font}>
           <Text style={styles.small}>Plan your</Text>
           <Text style={styles.big}>Luxurious</Text>
           <Text style={styles.big}>Vacation</Text>
+        </View>
 
           <Pressable style={styles.btn} onPress={() => router.push("/home")}>
             <Text style={styles.btnText}>Explore</Text>
@@ -45,6 +46,10 @@ export default function Landing() {
 const styles = StyleSheet.create({
   bg: {
     flex: 1,
+    justifyContent: "center",
+    
+   
+
   },
   overlay: {
     flex: 1,
@@ -62,6 +67,7 @@ const styles = StyleSheet.create({
   },
   bottom: {
     marginBottom: 60,
+    
   },
   small: {
     color: "white",
@@ -74,7 +80,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     marginTop: 30,
-    backgroundColor: "rgba(255,255,255,0.75)",
+    backgroundColor: "#8B8B8B",
     paddingVertical: 14,
     borderRadius: 14,
     alignItems: "center",
@@ -85,7 +91,7 @@ const styles = StyleSheet.create({
   },
   btnlogin: {
     alignSelf: "flex-end",
-    backgroundColor: "rgba(255,255,255,0.75)",
+    backgroundColor: "#8B8B8B",
     padding: 10,
     borderRadius: 14,
     marginTop: 15,
@@ -94,5 +100,9 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     fontSize: 14,
   },
+  font:{
+    marginBottom: 100,
+    fontSize: 8,
+  }
 
 });

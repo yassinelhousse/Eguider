@@ -5,62 +5,79 @@ import { colors } from "../../src/theme/colors";
 import { useAuthStore } from "../../src/store/auth.store";
 import { Alert } from "react-native";
 
-
 export default function LoginScreen() {
   const router = useRouter();
   const { login, loading } = useAuthStore();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Pressable onPress={() => router.back()} style={styles.backBtn}>
-          <Text style={styles.backText}>←</Text>
+        
+        <Pressable>
+          
         </Pressable>
-
-        <Text style={styles.headerTitle}>Login</Text>
-
-        <View style={{ width: 42 }} />
       </View>
 
       {/* Title */}
-      <Text style={styles.bigTitle}>Welcome Back</Text>
-      <Text style={styles.subTitle}>Login to continue your journey</Text>
+      <Text style={styles.welcomeText}>WELCOME BACK</Text>
+      <Text style={styles.bigTitle}>Log In to your Account</Text>
 
       {/* Email */}
-      <Text style={styles.label}>Email</Text>
-      <View style={styles.inputBox}>
-        <TextInput
-          value={email}
-          onChangeText={setEmail}
-          placeholder="example@gmail.com"
-          placeholderTextColor={colors.muted}
-          style={styles.input}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Email</Text>
+        <View style={styles.inputBox}>
+          <TextInput
+            value={email}
+            onChangeText={setEmail}
+            placeholder="johnsondoe@nomail.com"
+            placeholderTextColor="#999"
+            style={styles.input}
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
+        </View>
       </View>
 
       {/* Password */}
-      <Text style={styles.label}>Password</Text>
-      <View style={styles.inputBox}>
-        <TextInput
-          value={password}
-          onChangeText={setPassword}
-          placeholder="********"
-          placeholderTextColor={colors.muted}
-          style={styles.input}
-          secureTextEntry
-        />
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Password</Text>
+        <View style={styles.inputBox}>
+          <TextInput
+            value={password}
+            onChangeText={setPassword}
+            placeholder="****************"
+            placeholderTextColor="#999"
+            style={[styles.input, { flex: 1 }]}
+            secureTextEntry={!showPassword}
+          />
+          <Pressable onPress={() => setShowPassword(!showPassword)}>
+            <Text style={styles.eyeIcon}>👁</Text>
+          </Pressable>
+        </View>
       </View>
 
-      {/* Forgot */}
-      <Pressable style={styles.forgotBtn}>
-        <Text style={styles.forgotText}>Forgot password?</Text>
-      </Pressable>
+      {/* Remember me & Forgot Password */}
+      <View style={styles.optionsRow}>
+        <Pressable
+          style={styles.rememberRow}
+          onPress={() => setRememberMe(!rememberMe)}
+        >
+          <View style={[styles.checkbox, rememberMe && styles.checkboxChecked]}>
+            {rememberMe && <Text style={styles.checkmark}>✓</Text>}
+          </View>
+          <Text style={styles.rememberText}>Remember me</Text>
+        </Pressable>
+
+        <Pressable>
+          <Text style={styles.forgotText}>Forgot Password?</Text>
+        </Pressable>
+      </View>
 
       {/* Login Button */}
       <Pressable
@@ -78,15 +95,38 @@ export default function LoginScreen() {
         }}
       >
         <Text style={styles.mainBtnText}>
-          {loading ? "Loading..." : "Login"}
+          {loading ? "Loading..." : "CONTINUE"}
         </Text>
+      </Pressable>
+
+      {/* Divider */}
+      <View style={styles.dividerRow}>
+        <View style={styles.dividerLine} />
+        <Text style={styles.dividerText}>Or</Text>
+        <View style={styles.dividerLine} />
+      </View>
+
+      {/* Social Login Buttons */}
+      <Pressable style={styles.socialBtn}>
+        <Text style={styles.socialIcon}>G</Text>
+        <Text style={styles.socialText}>Log In with Google</Text>
+      </Pressable>
+
+      <Pressable style={styles.socialBtn}>
+        <Text style={styles.socialIconFb}>f</Text>
+        <Text style={styles.socialText}>Log In with Facebook</Text>
+      </Pressable>
+
+      <Pressable style={styles.socialBtn}>
+        <Text style={styles.socialIconApple}></Text>
+        <Text style={styles.socialText}>Log In with Apple</Text>
       </Pressable>
 
       {/* Signup link */}
       <View style={styles.bottomRow}>
-        <Text style={styles.bottomText}>Don’t have an account?</Text>
+        <Text style={styles.bottomText}>New User? </Text>
         <Pressable onPress={() => router.push("/auth/signup")}>
-          <Text style={styles.link}> Sign up</Text>
+          <Text style={styles.link}>SIGN UP HERE</Text>
         </Pressable>
       </View>
     </View>
@@ -96,114 +136,213 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.bg,
-    padding: 16,
-    paddingTop: 40,
+    backgroundColor: "#FFFFFF",
+    padding: 24,
+    paddingTop: 50,
   },
 
   header: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 20,
-  },
-
-  backBtn: {
-    width: 42,
-    height: 42,
-    borderRadius: 14,
-    backgroundColor: colors.grayBtn,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  backText: {
-    fontSize: 20,
-    fontWeight: "900",
+    marginBottom: 30,
   },
 
   headerTitle: {
-    fontSize: 18,
-    fontWeight: "900",
-    color: colors.text,
+    fontSize: 16,
+    fontWeight: "400",
+    color: "#3B82F6",
+  },
+
+  codeIcon: {
+    fontSize: 16,
+    color: "#3B82F6",
+  },
+
+  welcomeText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#666",
+    marginBottom: 8,
+    letterSpacing: 1,
   },
 
   bigTitle: {
     fontSize: 28,
-    fontWeight: "900",
-    color: colors.text,
+    fontWeight: "700",
+    color: "#000",
+    marginBottom: 30,
   },
 
-  subTitle: {
-    marginTop: 6,
-    fontSize: 14,
-    fontWeight: "600",
-    color: colors.muted,
-    marginBottom: 18,
+  inputContainer: {
+    marginBottom: 20,
   },
 
   label: {
-    marginTop: 10,
-    marginBottom: 6,
-    fontSize: 13,
-    fontWeight: "800",
-    color: colors.text,
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#666",
+    marginBottom: 8,
   },
 
   inputBox: {
-    height: 52,
-    borderRadius: 18,
-    backgroundColor: colors.grayBtn,
-    paddingHorizontal: 14,
-    justifyContent: "center",
+    height: 56,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#D1D5DB",
+    backgroundColor: "#FFFFFF",
+    paddingHorizontal: 16,
+    flexDirection: "row",
+    alignItems: "center",
   },
 
   input: {
-    fontSize: 14,
-    fontWeight: "600",
-    color: colors.text,
+    fontSize: 15,
+    fontWeight: "400",
+    color: "#000",
   },
 
-  forgotBtn: {
-    alignSelf: "flex-end",
-    marginTop: 10,
-    marginBottom: 18,
+  eyeIcon: {
+    fontSize: 18,
+    color: "#9CA3AF",
   },
 
-  forgotText: {
-    fontSize: 13,
-    fontWeight: "700",
-    color: colors.muted,
+  optionsRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 24,
   },
 
-  mainBtn: {
-    height: 52,
-    borderRadius: 18,
-    backgroundColor: colors.black,
+  rememberRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  checkbox: {
+    width: 20,
+    height: 20,
+    borderRadius: 4,
+    borderWidth: 2,
+    borderColor: "#D1D5DB",
+    backgroundColor: "#FFFFFF",
+    marginRight: 8,
     alignItems: "center",
     justifyContent: "center",
   },
 
+  checkboxChecked: {
+    backgroundColor: "#9CA3AF",
+    borderColor: "#9CA3AF",
+  },
+
+  checkmark: {
+    color: "#FFFFFF",
+    fontSize: 12,
+    fontWeight: "700",
+  },
+
+  rememberText: {
+    fontSize: 14,
+    fontWeight: "400",
+    color: "#000",
+  },
+
+  forgotText: {
+    fontSize: 14,
+    fontWeight: "400",
+    color: "#000",
+  },
+
+  mainBtn: {
+    height: 56,
+    borderRadius: 12,
+    backgroundColor: "#8B8B8B",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 24,
+  },
+
   mainBtnText: {
-    color: "white",
+    color: "#FFFFFF",
     fontSize: 15,
-    fontWeight: "900",
-    letterSpacing: 0.5,
+    fontWeight: "700",
+    letterSpacing: 1,
+  },
+
+  dividerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 24,
+  },
+
+  dividerLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: "#E5E7EB",
+  },
+
+  dividerText: {
+    marginHorizontal: 16,
+    fontSize: 14,
+    fontWeight: "400",
+    color: "#6B7280",
+  },
+
+  socialBtn: {
+    height: 56,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+    backgroundColor: "#FFFFFF",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 12,
+  },
+
+  socialIcon: {
+    fontSize: 20,
+    fontWeight: "700",
+    color: "#EA4335",
+    marginRight: 12,
+  },
+
+  socialIconFb: {
+    fontSize: 24,
+    fontWeight: "700",
+    color: "#1877F2",
+    marginRight: 12,
+  },
+
+  socialIconApple: {
+    fontSize: 20,
+    fontWeight: "700",
+    color: "#000",
+    marginRight: 12,
+  },
+
+  socialText: {
+    fontSize: 15,
+    fontWeight: "400",
+    color: "#374151",
   },
 
   bottomRow: {
     flexDirection: "row",
     justifyContent: "center",
-    marginTop: 18,
+    marginTop: 24,
   },
 
   bottomText: {
-    color: colors.muted,
-    fontWeight: "600",
+    color: "#6B7280",
+    fontWeight: "400",
+    fontSize: 14,
   },
 
   link: {
-    color: colors.text,
-    fontWeight: "900",
+    color: "#000",
+    fontWeight: "700",
+    fontSize: 14,
   },
 });

@@ -59,8 +59,7 @@ const seed = async () => {
         price: 40,
         durationHours: 4,
         images: [
-          "https://images.unsplash.com/photo-1548013146-72479768bada?w=1200",
-          "https://images.unsplash.com/photo-1580747470167-06a66b3c7f82?w=1200",
+          "		https://i.pinimg.com/736x/6f/dc/a2/6fdca2ab255d68ae4e56d437556fdbae.jpg",
         ],
         guideId: guide1.id,
       },
@@ -71,7 +70,7 @@ const seed = async () => {
         price: 35,
         durationHours: 3,
         images: [
-          "https://images.unsplash.com/photo-1542326237-94b1c5a538d4?w=1200",
+          "https://i.pinimg.com/736x/87/b3/56/87b35683c5c3dff82836ce9ee0517b7e.jpg",
         ],
         guideId: guide1.id,
       },
@@ -82,7 +81,7 @@ const seed = async () => {
         price: 45,
         durationHours: 4,
         images: [
-          "https://images.unsplash.com/photo-1600267185393-e158a98703de?w=1200",
+          "		https://i.pinimg.com/736x/24/35/ed/2435ed7f546ac01a70c57df87f14a07d.jpg",
         ],
         guideId: guide2.id,
       },
@@ -93,7 +92,7 @@ const seed = async () => {
         price: 120,
         durationHours: 8,
         images: [
-          "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1200",
+          "https://i.pinimg.com/736x/f7/fa/7f/f7fa7f9a367c61c924284ea29b1e2c3a.jpg",
         ],
         guideId: guide2.id,
       },
@@ -104,7 +103,7 @@ const seed = async () => {
         price: 25,
         durationHours: 2,
         images: [
-          "https://images.unsplash.com/photo-1596993160804-20e4b57a64c2?w=1200",
+          "https://i.pinimg.com/736x/96/58/a6/9658a6ca8506de28331f9cc44ae82a71.jpg",
         ],
         guideId: guide1.id,
       },
