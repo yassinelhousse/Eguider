@@ -59,7 +59,7 @@ const seed = async () => {
         price: 40,
         durationHours: 4,
         images: [
-          "		https://i.pinimg.com/736x/6f/dc/a2/6fdca2ab255d68ae4e56d437556fdbae.jpg",
+          "		https://i.pinimg.com/736x/33/51/21/3351218e883405bdcc5a06d4e84c6b07.jpg",
         ],
         guideId: guide1.id,
       },
@@ -81,7 +81,7 @@ const seed = async () => {
         price: 45,
         durationHours: 4,
         images: [
-          "		https://i.pinimg.com/736x/24/35/ed/2435ed7f546ac01a70c57df87f14a07d.jpg",
+          "https://i.pinimg.com/736x/88/32/6e/88326edca1a54c41b293acef1ca23cfa.jpg",
         ],
         guideId: guide2.id,
       },
