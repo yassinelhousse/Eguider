@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 
-import sequelize from "../backend/src/config/database.js";
-import apiRoutes from "../backend/src/routes/index.js";
+import sequelize from "./src/config/database.js";
+import apiRoutes from "./src/routes/index.js";
 
 dotenv.config();
 
